@@ -1,0 +1,14 @@
+{
+  "name": "gs-bot",
+  "version": "1.0.0",
+  "description": "Our lovely Telegram Bot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "*"
+  },
+  "author": "Les GS",
+  "license": "ISC"
+}
