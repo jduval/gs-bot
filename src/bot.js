@@ -1,4 +1,5 @@
 var TelegramBot = require('node-telegram-bot-api');
+var twitter = require('./twitter');
 
 var bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
 bot.on('message', function (msg) {
@@ -7,4 +8,19 @@ bot.on('message', function (msg) {
 
   if (/^\/tricount/.test(text))
     bot.sendMessage(chatId, process.env.TRICOUNT_URL);
+
+  if (/#/.test(text)) {
+    var matches = text.match(/#([^#]+)[\s,;]*/g);
+    if (matches) {
+      var hashtag = (matches[1]) ? matches[1] : matches[0];
+      return twitter.getTweet(hashtag, function(err, tweet_url) {
+        if (err)
+          return false;
+
+        if (tweet_url)
+          return bot.sendMessage(chatId, tweet_url);
+        return bot.sendMessage(chatId, 'Tweetasse not found :(');
+      });
+    }
+  }
 });

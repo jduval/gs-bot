@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "node-telegram-bot-api": "*"
+    "node-telegram-bot-api": "*",
+    "twit": "*"
   },
   "author": "Les GS",
   "license": "ISC"
