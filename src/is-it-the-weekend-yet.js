@@ -1,8 +1,6 @@
-var cheerio = require('cheerio');
 var request = require('request');
 
 const URL = 'http://estcequecestbientotleweekend.fr/api';
-const SELECTOR = '.msg';
 
 function isItTheWeekendYet(callback) {
   request(URL, function (err, response, body) {
