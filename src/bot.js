@@ -1,5 +1,6 @@
 var TelegramBot = require('node-telegram-bot-api');
 var twitter = require('./twitter');
+var isItTheWeekendYet = require('./is-it-the-weekend-yet');
 
 var bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
 bot.on('message', function (msg) {
@@ -22,5 +23,11 @@ bot.on('message', function (msg) {
         return bot.sendMessage(chatId, 'Tweetasse not found :(');
       });
     }
+  }
+
+  if (/^\/weekend/.test(text)) {
+    isItTheWeekendYet(function(err, m) {
+      bot.sendMessage(chatId, m);
+    });
   }
 });
