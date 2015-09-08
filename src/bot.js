@@ -10,6 +10,9 @@ bot.on('message', function (msg) {
   if (/^\/tricount/.test(text))
     bot.sendMessage(chatId, process.env.TRICOUNT_URL);
 
+  if (/^\^\^$/.test(text))
+    bot.sendMessage(chatId, 'ChapoChapo');
+
   if (/#/.test(text)) {
     var matches = text.match(/#([^#]+)[\s,;]*/g);
     if (matches) {
