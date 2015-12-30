@@ -6,7 +6,9 @@ const REPLIES = [
   'ahah',
   'lol',
   '^^',
-  'Drôle !'
+  'Drôle !',
+  'Ça c\'est rigolo',
+  'Hi hi'
 ];
 
 var bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
@@ -38,7 +40,7 @@ bot.on('message', function (msg) {
     });
   }
 
-  if (/^((ah\ ?|ha\ ?){2,}|(lol|mdr|\^\^))$/i.test(text)) {
+  if (/^((ah\ ?|ha\ ?){2,}|(draule|laule|lol|mdr|\^\^))$/i.test(text)) {
     var r = REPLIES[Math.floor(Math.random() * REPLIES.length)];
     bot.sendMessage(chatId, r);
   }
