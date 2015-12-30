@@ -2,6 +2,13 @@ var TelegramBot = require('node-telegram-bot-api');
 var twitter = require('./twitter');
 var isItTheWeekendYet = require('./is-it-the-weekend-yet');
 
+const REPLIES = [
+  'ahah',
+  'lol',
+  '^^',
+  'Drôle !'
+];
+
 var bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
 bot.on('message', function (msg) {
   var chatId = msg.chat.id;
@@ -9,9 +16,6 @@ bot.on('message', function (msg) {
 
   if (/^\/tricount/.test(text))
     bot.sendMessage(chatId, process.env.TRICOUNT_URL);
-
-  if (/^\^\^$/.test(text))
-    bot.sendMessage(chatId, 'ChapoChapo');
 
   if (/#/.test(text)) {
     var matches = text.match(/#([^#]+)[\s,;]*/g);
@@ -32,5 +36,10 @@ bot.on('message', function (msg) {
     isItTheWeekendYet(function(err, m) {
       bot.sendMessage(chatId, m);
     });
+  }
+
+  if (/^((ah\ ?|ha\ ?){2,}|(lol|mdr|\^\^))$/i.test(text)) {
+    var r = REPLIES[Math.floor(Math.random() * REPLIES.length)];
+    bot.sendMessage(chatId, r);
   }
 });
