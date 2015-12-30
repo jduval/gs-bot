@@ -40,7 +40,7 @@ bot.on('message', function (msg) {
     });
   }
 
-  if (/^((ah\ ?|ha\ ?){2,}|(draule|laule|lol|mdr|\^\^))$/i.test(text)) {
+  if (/^((ah\ ?|ha\ ?){2,}|(draule|laule|lol|mdr|\^\^))$/i.test(text) && !!Math.round(Math.random())) {
     var r = REPLIES[Math.floor(Math.random() * REPLIES.length)];
     bot.sendMessage(chatId, r);
   }
