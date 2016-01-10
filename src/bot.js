@@ -16,8 +16,10 @@ bot.on('message', function (msg) {
   var chatId = msg.chat.id;
   var text = msg.text;
 
-  if (/^\/tricount/.test(text))
-    bot.sendMessage(chatId, process.env.TRICOUNT_URL);
+  if (/^\/tricount/.test(text)) {
+    bot.sendMessage(chatId, 'Old tricount: ' + process.env.TRICOUNT_URL_OLD);
+    bot.sendMessage(chatId, 'New tricount: ' + process.env.TRICOUNT_URL);
+  }
 
   if (/#/.test(text)) {
     var matches = text.match(/#([^#]+)[\s,;]*/g);
