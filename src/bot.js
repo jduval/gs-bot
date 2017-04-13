@@ -11,17 +11,33 @@ const REPLIES = [
   'Hi hi'
 ];
 
+const TURNUP = [
+  'ouloulou',
+  'turn up',
+  'turnup',
+  'turnoup',
+  'turnoupoup',
+  'turnoupoupoup',
+];
+
+ERROR_EMOJI = [
+  '😱',
+  '😨',
+  '😰',
+  '😭',
+]
+
 var bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
+
 bot.on('message', function (msg) {
   var chatId = msg.chat.id;
   var text = msg.text;
 
   if (/^\/tricount/.test(text)) {
-    bot.sendMessage(chatId, 'Old tricount: ' + process.env.TRICOUNT_URL_OLD);
-    bot.sendMessage(chatId, 'New tricount: ' + process.env.TRICOUNT_URL);
+    bot.sendMessage(chatId, process.env.TRICOUNT_URL);
   }
 
-  if (/#/.test(text)) {
+  if (/^#/.test(text)) {
     var matches = text.match(/#([^#]+)[\s,;]*/g);
     if (matches) {
       var hashtag = (matches[1]) ? matches[1] : matches[0];
@@ -31,7 +47,7 @@ bot.on('message', function (msg) {
 
         if (tweet_url)
           return bot.sendMessage(chatId, tweet_url);
-        return bot.sendMessage(chatId, 'Tweetasse not found :(');
+        return bot.sendMessage(chatId, `Tweetasse not found ${ERROR_EMOJI[Math.floor(Math.random() * ERROR_EMOJI.length)]}`);
       });
     }
   }
@@ -41,6 +57,13 @@ bot.on('message', function (msg) {
       bot.sendMessage(chatId, m);
     });
   }
+
+  TURNUP.map(entry => {
+    const regExp = new RegExp(entry, 'i');
+    if (regExp.test(text))
+      bot.forwardMessage(chatId, 91220779, 67113) // TURN UP !!!
+        .catch(console.error);
+  });
 
   // if (/^((ah\ ?|ha\ ?){2,}|(draule|laule|lol|mdr|\^\^))$/i.test(text) && !!Math.round(Math.random())) {
   //   var r = REPLIES[Math.floor(Math.random() * REPLIES.length)];
