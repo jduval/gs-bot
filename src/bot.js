@@ -16,8 +16,6 @@ const TURNUP = [
   'turn up',
   'turnup',
   'turnoup',
-  'turnoupoup',
-  'turnoupoupoup',
 ];
 
 ERROR_EMOJI = [
