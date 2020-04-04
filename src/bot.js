@@ -24,8 +24,10 @@ bot.sendMessage(JEANJASS_ID, 'Je viens de reboot 🤖');
 
 var job = new CronJob(
   '0 16 * * *', // eveyday at 4pm
-  function () {
-    const message = `Your daily dose of ${getRandomEmoji(SHOCK_EMOJI)} !! ${await reddit.getRandomSubRedditPost('holdmyfeedingtube')}`;
+  async function () {
+    const message = `Your daily dose of ${getRandomEmoji(SHOCK_EMOJI)} !! ${await reddit.getRandomSubRedditPost(
+      'holdmyfeedingtube'
+    )}`;
     bot.sendMessage(GROUP_CHAT_ID, message);
   },
   null,
