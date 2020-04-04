@@ -20,7 +20,7 @@ const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
 const JEANJASS_ID = process.env.JEANJASS_ID;
 const GROUP_CHAT_ID = process.env.GROUP_CHAT_ID;
 
-bot.sendMessage(JEANJASS_ID, 'Je viens de reboot 🤖');
+bot.sendMessage(JEANJASS_ID, `Je viens de reboot 🤖 à ${new Date().toISOString()}`);
 
 var job = new CronJob(
   '0 16 * * *', // eveyday at 4pm
