@@ -26,7 +26,7 @@ var job = new CronJob(
   '0 16 * * *', // eveyday at 4pm
   async function () {
     const message = `Your daily dose of ${getRandomEmoji(SHOCK_EMOJI)} !! ${await reddit.getRandomSubRedditPost(
-      'holdmyfeedingtube'
+      'yesyesyesno'
     )}`;
     bot.sendMessage(GROUP_CHAT_ID, message);
   },
